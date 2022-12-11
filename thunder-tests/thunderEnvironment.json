@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "107a6542-a2e9-4d8c-9145-25e141a76f39",
+    "name": "base",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2022-12-09T14:46:27.150Z",
+    "modified": "2022-12-09T14:46:27.150Z",
+    "data": [
+      {
+        "name": "base_url",
+        "value": "http://localhost:3000"
+      }
+    ]
+  }
+]
