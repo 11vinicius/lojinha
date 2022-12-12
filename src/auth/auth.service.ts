@@ -10,21 +10,24 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) { }
 
-    async Validate(email: string, password: string) {
-        const user = await this.userService.IsEmailExists(email);
-        const passwordIsMatch = compareSync(password, user.password);
-        if (user && passwordIsMatch) {
-            const { password, ...result } = user;
-            return result;
+    async validateUser(email: string, password: string) {
+        try {
+            const user = await this.userService.IsEmailExists(email);
+            const passwordIsMatch = compareSync(password, user.password);
+            if (user && passwordIsMatch) {
+                const { password, ...result } = user;
+                return result;
+            }
+        } catch (error) {
+            return null;
         }
-        return null;
+
     }
 
     login(user: any) {
-        console.log(user)
         const payload = { username: user.name, sub: user.id }
         return {
-            access_tokem: this.jwtService.sign(payload)
+            access_token: this.jwtService.sign(payload)
         }
     }
 }

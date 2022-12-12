@@ -3,12 +3,14 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
+import { UseGuards } from '@nestjs/common/decorators';
+import { JwtAuthGuard } from 'src/auth/jwt-guard';
 
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    ) {}
+  ) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -16,6 +18,8 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+
   findAll() {
     return this.userService.findAll();
   }
